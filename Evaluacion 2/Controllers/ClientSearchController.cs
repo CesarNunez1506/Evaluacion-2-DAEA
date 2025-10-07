@@ -7,11 +7,11 @@ namespace Evaluacion_2.Controllers;
 [Route("api/[controller]")]
 public class ClientSearchController : ControllerBase
 {
-    private readonly IClientRepository _clientRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public ClientSearchController(IClientRepository clientRepository)
+    public ClientSearchController(IUnitOfWork unitOfWork)
     {
-        _clientRepository = clientRepository;
+        _unitOfWork = unitOfWork;
     }
 
     /// <summary>
@@ -22,7 +22,7 @@ public class ClientSearchController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetClientsByName([FromQuery] string name)
     {
-        var clients = await _clientRepository.GetClientsByNameAsync(name);
+        var clients = await _unitOfWork.ClientRepository.GetClientsByNameAsync(name);
         return Ok(clients);
     }
 }

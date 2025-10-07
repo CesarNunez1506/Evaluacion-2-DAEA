@@ -7,11 +7,11 @@ namespace Evaluacion_2.Controllers;
 [Route("api/[controller]")]
 public class ProductPriceController : ControllerBase
 {
-    private readonly IProductRepository _productRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public ProductPriceController(IProductRepository productRepository)
+    public ProductPriceController(IUnitOfWork unitOfWork)
     {
-        _productRepository = productRepository;
+        _unitOfWork = unitOfWork;
     }
 
     /// <summary>
@@ -22,7 +22,7 @@ public class ProductPriceController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetProductsByPrice([FromQuery] decimal minPrice)
     {
-        var products = await _productRepository.GetProductsByPriceAsync(minPrice);
+        var products = await _unitOfWork.ProductRepository.GetProductsByPriceAsync(minPrice);
         return Ok(products);
     }
 }

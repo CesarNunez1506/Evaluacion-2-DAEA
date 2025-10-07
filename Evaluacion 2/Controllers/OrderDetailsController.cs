@@ -7,11 +7,11 @@ namespace Evaluacion_2.Controllers;
 [Route("api/[controller]")]
 public class OrderDetailsController : ControllerBase
 {
-    private readonly IOrderRepository _orderRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public OrderDetailsController(IOrderRepository orderRepository)
+    public OrderDetailsController(IUnitOfWork unitOfWork)
     {
-        _orderRepository = orderRepository;
+        _unitOfWork = unitOfWork;
     }
 
     /// <summary>
@@ -22,7 +22,7 @@ public class OrderDetailsController : ControllerBase
     [HttpGet("{orderId}/products")]
     public async Task<IActionResult> GetOrderDetails(int orderId)
     {
-        var details = await _orderRepository.GetOrderDetailsAsync(orderId);
+        var details = await _unitOfWork.OrderRepository.GetOrderDetailsAsync(orderId);
         return Ok(details);
     }
 
@@ -34,7 +34,7 @@ public class OrderDetailsController : ControllerBase
     [HttpGet("{orderId}/total-products")]
     public async Task<IActionResult> GetTotalProductsInOrder(int orderId)
     {
-        var total = await _orderRepository.GetTotalProductsInOrderAsync(orderId);
+        var total = await _unitOfWork.OrderRepository.GetTotalProductsInOrderAsync(orderId);
         return Ok(new { TotalProducts = total });
     }
 }
