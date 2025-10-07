@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+
 namespace Evaluacion_2.Repository.Interface;
 
 public interface IUnitOfWork : IDisposable

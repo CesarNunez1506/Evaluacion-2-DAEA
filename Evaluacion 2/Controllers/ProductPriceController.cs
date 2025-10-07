@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Evaluacion_2.Repository.interfaces;
+using Evaluacion_2.Repository.Interface;
 
 namespace Evaluacion_2.Controllers;
 
@@ -23,6 +23,36 @@ public class ProductPriceController : ControllerBase
     public async Task<IActionResult> GetProductsByPrice([FromQuery] decimal minPrice)
     {
         var products = await _unitOfWork.ProductRepository.GetProductsByPriceAsync(minPrice);
+        return Ok(products);
+    }
+
+    /// <summary>
+    /// Ejercicio 5: Obtener el Producto Más Caro
+    /// </summary>
+    [HttpGet("most-expensive")]
+    public async Task<IActionResult> GetMostExpensiveProduct()
+    {
+        var product = await _unitOfWork.ProductRepository.GetMostExpensiveProductAsync();
+        return Ok(product);
+    }
+
+    /// <summary>
+    /// Ejercicio 7: Obtener el Promedio de Precio de los Productos
+    /// </summary>
+    [HttpGet("average-price")]
+    public async Task<IActionResult> GetAveragePrice()
+    {
+        var averagePrice = await _unitOfWork.ProductRepository.GetAveragePriceAsync();
+        return Ok(new { AveragePrice = averagePrice });
+    }
+
+    /// <summary>
+    /// Ejercicio 8: Obtener Todos los Productos que No Tienen Descripción
+    /// </summary>
+    [HttpGet("without-description")]
+    public async Task<IActionResult> GetProductsWithoutDescription()
+    {
+        var products = await _unitOfWork.ProductRepository.GetProductsWithoutDescriptionAsync();
         return Ok(products);
     }
 }

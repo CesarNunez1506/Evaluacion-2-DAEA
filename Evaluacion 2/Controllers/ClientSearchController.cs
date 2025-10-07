@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Evaluacion_2.Repository.interfaces;
+using Evaluacion_2.Repository.Interface;
 
 namespace Evaluacion_2.Controllers;
 
@@ -24,5 +24,15 @@ public class ClientSearchController : ControllerBase
     {
         var clients = await _unitOfWork.ClientRepository.GetClientsByNameAsync(name);
         return Ok(clients);
+    }
+
+    /// <summary>
+    /// Ejercicio 9: Obtener el Cliente con Mayor Número de Pedidos
+    /// </summary>
+    [HttpGet("most-orders")]
+    public async Task<IActionResult> GetClientWithMostOrders()
+    {
+        var client = await _unitOfWork.ClientRepository.GetClientWithMostOrdersAsync();
+        return Ok(client);
     }
 }

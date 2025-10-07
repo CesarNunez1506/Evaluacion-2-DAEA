@@ -1,6 +1,6 @@
 using Evaluacion_2.Models;
 using Evaluacion_2.Repository;
-using Evaluacion_2.Repository.interfaces;
+using Evaluacion_2.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
