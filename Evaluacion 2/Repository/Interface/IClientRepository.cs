@@ -9,5 +9,5 @@ public record ClientOrderCount(int ClientId, string ClientName, int OrderCount);
 public interface IClientRepository
 {
     Task<IEnumerable<Client>> GetClientsByNameAsync(string name);
-    Task<ClientOrderCount> GetClientWithMostOrdersAsync();
+    Task<IEnumerable<ClientOrderCount>> GetClientsWithMostOrdersAsync();
 }

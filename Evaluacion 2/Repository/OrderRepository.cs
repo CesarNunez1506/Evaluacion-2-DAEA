@@ -57,14 +57,15 @@ public class OrderRepository : IOrderRepository
     public async Task<IEnumerable<ProductSoldDto>> GetProductsSoldToClientAsync(int clientId)
     {
         return await _context.Orders
+            .Include(o => o.Orderdetails)
+            .ThenInclude(od => od.Product)
             .Where(o => o.ClientId == clientId)
-            .SelectMany(o => o.Orderdetails)
-            .Select(od => new ProductSoldDto
+            .SelectMany(o => o.Orderdetails, (o, od) => new ProductSoldDto
             {
                 ProductName = od.Product.Name,
                 Price = od.Product.Price,
                 Quantity = od.Quantity,
-                OrderDate = od.Order.OrderDate
+                OrderDate = o.OrderDate
             })
             .ToListAsync();
     }
@@ -72,6 +73,8 @@ public class OrderRepository : IOrderRepository
     public async Task<IEnumerable<Client>> GetClientsWhoPurchasedProductAsync(int productId)
     {
         return await _context.Orderdetails
+            .Include(od => od.Order)
+            .ThenInclude(o => o.Client)
             .Where(od => od.ProductId == productId)
             .Select(od => od.Order.Client)
             .Distinct()

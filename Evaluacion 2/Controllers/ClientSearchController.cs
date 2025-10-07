@@ -27,12 +27,12 @@ public class ClientSearchController : ControllerBase
     }
 
     /// <summary>
-    /// Ejercicio 9: Obtener el Cliente con Mayor Número de Pedidos
+    /// Ejercicio 9: Obtener los Clientes con Mayor Número de Pedidos
     /// </summary>
     [HttpGet("most-orders")]
-    public async Task<IActionResult> GetClientWithMostOrders()
+    public async Task<IActionResult> GetClientsWithMostOrders()
     {
-        var client = await _unitOfWork.ClientRepository.GetClientWithMostOrdersAsync();
-        return Ok(client);
+        var clients = await _unitOfWork.ClientRepository.GetClientsWithMostOrdersAsync();
+        return Ok(clients);
     }
 }

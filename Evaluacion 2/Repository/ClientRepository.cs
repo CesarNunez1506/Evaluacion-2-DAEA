@@ -21,14 +21,22 @@ public class ClientRepository : IClientRepository
             .ToListAsync();
     }
 
-    public async Task<ClientOrderCount> GetClientWithMostOrdersAsync()
+    public async Task<IEnumerable<ClientOrderCount>> GetClientsWithMostOrdersAsync()
     {
-        return await _context.Clients
+        // First, get the maximum number of orders any client has
+        var maxOrders = await _context.Clients
+            .Select(c => c.Orders.Count)
+            .MaxAsync();
+
+        // Then, get all clients that have that number of orders
+        var clientsWithMostOrders = await _context.Clients
+            .Where(c => c.Orders.Count == maxOrders)
             .Select(c => new ClientOrderCount(
                 c.ClientId,
                 c.Name,
                 c.Orders.Count))
-            .OrderByDescending(c => c.OrderCount)
-            .FirstOrDefaultAsync();
+            .ToListAsync();
+
+        return clientsWithMostOrders;
     }
 }
