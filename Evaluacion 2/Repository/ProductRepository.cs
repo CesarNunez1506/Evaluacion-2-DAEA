@@ -1,4 +1,5 @@
 using Evaluacion_2.Models;
+using Evaluacion_2.Repository.interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Evaluacion_2.Repository;

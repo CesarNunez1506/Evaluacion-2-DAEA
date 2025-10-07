@@ -1,6 +1,14 @@
+using Evaluacion_2.Models;
+using Evaluacion_2.Repository;
+using Evaluacion_2.Repository.interfaces;
+using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -10,6 +18,18 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1",
         Description = "API para la Evaluación 2"
     });
+});
+
+builder.Services.AddScoped<IClientRepository, ClientRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+// Register DbContext
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    var serverVersion = new MySqlServerVersion(new Version(10, 4, 32)); // MariaDB version
+    options.UseMySql(connectionString, serverVersion);
 });
 
 var app = builder.Build();
@@ -25,6 +45,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthorization();
+app.MapControllers();
 
 var summaries = new[]
 {

@@ -232,3 +232,4 @@ C:\Users\Cesar\RiderProjects\Evaluacion 2\Evaluacion 2\obj\Debug\net9.0\refint\E
 C:\Users\Cesar\RiderProjects\Evaluacion 2\Evaluacion 2\obj\Debug\net9.0\Evaluacion 2.pdb
 C:\Users\Cesar\RiderProjects\Evaluacion 2\Evaluacion 2\obj\Debug\net9.0\Evaluacion 2.genruntimeconfig.cache
 C:\Users\Cesar\RiderProjects\Evaluacion 2\Evaluacion 2\obj\Debug\net9.0\ref\Evaluacion 2.dll
+C:\Users\Cesar\RiderProjects\Evaluacion 2\Evaluacion 2\obj\Debug\net9.0\Evaluacion 2.sourcelink.json
