@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cesar\\RiderProjects\\Evaluacion 2\\Evaluacion 2\\Evaluacion 2.csproj": {}
+    "C:\\Users\\Cesar\\RiderProjects\\Evaluacion 2\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
     "C:\\Users\\Cesar\\RiderProjects\\Evaluacion 2\\Application\\Application.csproj": {
@@ -126,14 +126,14 @@
         }
       }
     },
-    "C:\\Users\\Cesar\\RiderProjects\\Evaluacion 2\\Evaluacion 2\\Evaluacion 2.csproj": {
+    "C:\\Users\\Cesar\\RiderProjects\\Evaluacion 2\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cesar\\RiderProjects\\Evaluacion 2\\Evaluacion 2\\Evaluacion 2.csproj",
-        "projectName": "Evaluacion 2",
-        "projectPath": "C:\\Users\\Cesar\\RiderProjects\\Evaluacion 2\\Evaluacion 2\\Evaluacion 2.csproj",
+        "projectUniqueName": "C:\\Users\\Cesar\\RiderProjects\\Evaluacion 2\\Infrastructure\\Infrastructure.csproj",
+        "projectName": "Infrastructure",
+        "projectPath": "C:\\Users\\Cesar\\RiderProjects\\Evaluacion 2\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Cesar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cesar\\RiderProjects\\Evaluacion 2\\Evaluacion 2\\obj\\",
+        "outputPath": "C:\\Users\\Cesar\\RiderProjects\\Evaluacion 2\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Cesar\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -173,33 +173,13 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "Microsoft.AspNetCore.OpenApi": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.8, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[9.0.0-preview.1.24081.2, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[9.0.0-preview.1.24081.2, )"
-            },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-              "target": "Package",
-              "version": "[9.0.0-preview.1.24112.3, )"
+              "version": "[9.0.10, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
-              "version": "[9.0.0-preview.1, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.5.0, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
@@ -214,9 +194,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

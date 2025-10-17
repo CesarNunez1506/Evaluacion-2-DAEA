@@ -1,9 +1,5 @@
-using Evaluacion_2.Models;
-using Evaluacion_2.Repository;
-using Evaluacion_2.Repository.Interface;
+using Evaluacion_2;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -73,7 +69,10 @@ app.MapGet("/weatherforecast", () =>
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+namespace Evaluacion_2
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+    {
+        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    }
 }
