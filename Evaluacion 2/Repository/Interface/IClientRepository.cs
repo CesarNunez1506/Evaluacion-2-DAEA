@@ -10,4 +10,5 @@ public interface IClientRepository
 {
     Task<IEnumerable<Client>> GetClientsByNameAsync(string name);
     Task<IEnumerable<ClientOrderCount>> GetClientsWithMostOrdersAsync();
+    Task<IEnumerable<Evaluacion_2.Models.DTO.ClientOrderDto>> GetClientsWithOrdersAsDtoAsync();
 }

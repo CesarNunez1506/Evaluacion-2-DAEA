@@ -1,7 +1,9 @@
+
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Evaluacion_2.Models;
+using Evaluacion_2.Models.DTO;
 
 namespace Evaluacion_2.Repository.Interface;
 

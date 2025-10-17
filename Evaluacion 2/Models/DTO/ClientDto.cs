@@ -1,0 +1,8 @@
+namespace Evaluacion_2.Models.DTO;
+
+public class ClientDto
+{
+    public int ClientId { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+}

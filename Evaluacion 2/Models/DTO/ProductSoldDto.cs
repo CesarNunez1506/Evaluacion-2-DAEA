@@ -1,4 +1,4 @@
-namespace Evaluacion_2.Repository.Interface;
+namespace Evaluacion_2.Models.DTO;
 
 public class ProductSoldDto
 {

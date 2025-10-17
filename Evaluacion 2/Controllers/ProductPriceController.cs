@@ -1,17 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
-using Evaluacion_2.Repository.Interface;
+using Evaluacion_2.Service;
 
 namespace Evaluacion_2.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+
 public class ProductPriceController : ControllerBase
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IProductService _productService;
 
-    public ProductPriceController(IUnitOfWork unitOfWork)
+    public ProductPriceController(IProductService productService)
     {
-        _unitOfWork = unitOfWork;
+        _productService = productService;
     }
 
     /// <summary>
@@ -22,7 +23,7 @@ public class ProductPriceController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetProductsByPrice([FromQuery] decimal minPrice)
     {
-        var products = await _unitOfWork.ProductRepository.GetProductsByPriceAsync(minPrice);
+        var products = await _productService.GetProductsByPriceAsync(minPrice);
         return Ok(products);
     }
 
@@ -32,7 +33,7 @@ public class ProductPriceController : ControllerBase
     [HttpGet("most-expensive")]
     public async Task<IActionResult> GetMostExpensiveProduct()
     {
-        var product = await _unitOfWork.ProductRepository.GetMostExpensiveProductAsync();
+        var product = await _productService.GetMostExpensiveProductAsync();
         return Ok(product);
     }
 
@@ -42,7 +43,7 @@ public class ProductPriceController : ControllerBase
     [HttpGet("average-price")]
     public async Task<IActionResult> GetAveragePrice()
     {
-        var averagePrice = await _unitOfWork.ProductRepository.GetAveragePriceAsync();
+        var averagePrice = await _productService.GetAveragePriceAsync();
         return Ok(new { AveragePrice = averagePrice });
     }
 
@@ -52,7 +53,7 @@ public class ProductPriceController : ControllerBase
     [HttpGet("without-description")]
     public async Task<IActionResult> GetProductsWithoutDescription()
     {
-        var products = await _unitOfWork.ProductRepository.GetProductsWithoutDescriptionAsync();
+        var products = await _productService.GetProductsWithoutDescriptionAsync();
         return Ok(products);
     }
 }

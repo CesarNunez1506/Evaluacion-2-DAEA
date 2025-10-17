@@ -2,41 +2,58 @@ using System.Linq;
 using Evaluacion_2.Models;
 using Evaluacion_2.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
+using Evaluacion_2.Models.DTO;
 
-namespace Evaluacion_2.Repository;
-
-public class ClientRepository : IClientRepository
+namespace Evaluacion_2.Repository
 {
-    private readonly AppDbContext _context;
-
-    public ClientRepository(AppDbContext context)
+    public class ClientRepository : IClientRepository
     {
-        _context = context;
-    }
+        private readonly AppDbContext _context;
 
-    public async Task<IEnumerable<Client>> GetClientsByNameAsync(string name)
-    {
-        return await _context.Clients
-            .Where(c => c.Name.Contains(name))
-            .ToListAsync();
-    }
+        public ClientRepository(AppDbContext context)
+        {
+            _context = context;
+        }
 
-    public async Task<IEnumerable<ClientOrderCount>> GetClientsWithMostOrdersAsync()
-    {
-        // First, get the maximum number of orders any client has
-        var maxOrders = await _context.Clients
-            .Select(c => c.Orders.Count)
-            .MaxAsync();
+        public async Task<IEnumerable<ClientOrderDto>> GetClientsWithOrdersAsDtoAsync()
+        {
+            return await _context.Clients
+                .AsNoTracking()
+                .Include(c => c.Orders)
+                .Select(client => new ClientOrderDto
+                {
+                    ClientName = client.Name,
+                    Orders = client.Orders
+                        .Select(order => new OrderDto
+                        {
+                            OrderId = order.OrderId,
+                            OrderDate = order.OrderDate
+                        }).ToList()
+                })
+                .ToListAsync();
+        }
 
-        // Then, get all clients that have that number of orders
-        var clientsWithMostOrders = await _context.Clients
-            .Where(c => c.Orders.Count == maxOrders)
-            .Select(c => new ClientOrderCount(
-                c.ClientId,
-                c.Name,
-                c.Orders.Count))
-            .ToListAsync();
+        public async Task<IEnumerable<Client>> GetClientsByNameAsync(string name)
+        {
+            return await _context.Clients
+                .Where(c => c.Name.Contains(name))
+                .ToListAsync();
+        }
 
-        return clientsWithMostOrders;
+        public async Task<IEnumerable<ClientOrderCount>> GetClientsWithMostOrdersAsync()
+        {
+            var maxOrders = await _context.Clients
+                .Select(c => c.Orders.Count)
+                .MaxAsync();
+            var clientsWithMostOrders = await _context.Clients
+                .Where(c => c.Orders.Count == maxOrders)
+                .Select(c => new ClientOrderCount(
+                    c.ClientId,
+                    c.Name,
+                    c.Orders.Count))
+                .ToListAsync();
+
+            return clientsWithMostOrders;
+        }
     }
 }

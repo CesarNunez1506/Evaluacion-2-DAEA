@@ -1,17 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
-using Evaluacion_2.Repository.Interface;
+using Evaluacion_2.Service;
 
 namespace Evaluacion_2.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+
+
+
 public class PurchaseAnalyticsController : ControllerBase
 {
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IOrderService _orderService;
 
-    public PurchaseAnalyticsController(IUnitOfWork unitOfWork)
+    public PurchaseAnalyticsController(IOrderService orderService)
     {
-        _unitOfWork = unitOfWork;
+        _orderService = orderService;
     }
 
     /// <summary>
@@ -22,7 +25,7 @@ public class PurchaseAnalyticsController : ControllerBase
     [HttpGet("products-by-client/{clientId}")]
     public async Task<IActionResult> GetProductsSoldToClient(int clientId)
     {
-        var products = await _unitOfWork.OrderRepository.GetProductsSoldToClientAsync(clientId);
+        var products = await _orderService.GetProductsSoldToClientAsync(clientId);
         return Ok(products);
     }
 
@@ -34,7 +37,7 @@ public class PurchaseAnalyticsController : ControllerBase
     [HttpGet("clients-by-product/{productId}")]
     public async Task<IActionResult> GetClientsWhoPurchasedProduct(int productId)
     {
-        var clients = await _unitOfWork.OrderRepository.GetClientsWhoPurchasedProductAsync(productId);
+        var clients = await _orderService.GetClientsWhoPurchasedProductAsync(productId);
         return Ok(clients);
     }
 }
