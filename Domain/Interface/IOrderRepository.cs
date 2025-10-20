@@ -11,4 +11,5 @@ public interface IOrderRepository
     Task<IEnumerable<OrderDetailDto>> GetAllOrderDetailsAsync();
     Task<IEnumerable<ProductSoldDto>> GetProductsSoldToClientAsync(int clientId);
     Task<IEnumerable<Client>> GetClientsWhoPurchasedProductAsync(int productId);
+    Task<IEnumerable<OrderDetailsDto>> GetOrdersWithDetailsAsDtoAsync();
 }

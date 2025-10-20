@@ -55,5 +55,38 @@ namespace Infrastructure.Repository
 
             return clientsWithMostOrders;
         }
+
+        public async Task<IEnumerable<ClientProductTotal>> GetClientsWithTotalProductsAsync()
+        {
+            return await _context.Clients
+                .AsNoTracking()
+                .Select(client => new ClientProductTotal
+                {
+                    ClientId = client.ClientId,
+                    ClientName = client.Name,
+                    TotalProducts = client.Orders
+                        .Select(order => order.Orderdetails.Sum(od => od.Quantity))
+                        .Sum()
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<SalesByClientDto>> GetSalesByClientAsync()
+        {
+            var sales = await _context.Orders
+                .Include(order => order.Orderdetails)
+                .ThenInclude(od => od.Product)
+                .AsNoTracking()
+                .GroupBy(order => order.ClientId)
+                .Select(group => new SalesByClientDto
+                {
+                    ClientName = _context.Clients.FirstOrDefault(c => c.ClientId == group.Key)!.Name,
+                    TotalSales = group.Sum(order => order.Orderdetails.Sum(detail => detail.Quantity * detail.Product.Price))
+                })
+                .OrderByDescending(s => s.TotalSales)
+                .ToListAsync();
+
+            return sales;
+        }
     }
 }

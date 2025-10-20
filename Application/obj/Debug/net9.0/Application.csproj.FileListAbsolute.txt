@@ -1,0 +1,5 @@
+C:\Users\Cesar\RiderProjects\Evaluacion 2\Application\obj\Debug\net9.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Cesar\RiderProjects\Evaluacion 2\Application\obj\Debug\net9.0\Application.AssemblyInfoInputs.cache
+C:\Users\Cesar\RiderProjects\Evaluacion 2\Application\obj\Debug\net9.0\Application.AssemblyInfo.cs
+C:\Users\Cesar\RiderProjects\Evaluacion 2\Application\obj\Debug\net9.0\Application.csproj.CoreCompileInputs.cache
+C:\Users\Cesar\RiderProjects\Evaluacion 2\Application\obj\Debug\net9.0\Application.sourcelink.json

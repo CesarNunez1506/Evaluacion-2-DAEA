@@ -1,4 +1,6 @@
 using Application.DTO;
+using Domain.Interface;
+using Domain.Entities;
 
 namespace Application.Service
 {

@@ -1,4 +1,6 @@
+using Domain.Interface;
 using Evaluacion_2;
+using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,10 +18,10 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IClientRepository, ClientRepository>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IUnitOfWork, IUnitOfWork>();
+builder.Services.AddScoped<IOrderRepository, IOrderRepository();
+builder.Services.AddScoped<IClientRepository, IClientRepository>();
+builder.Services.AddScoped<IProductRepository, IProductRepository>();
 builder.Services.AddScoped<Evaluacion_2.Service.IOrderService, Evaluacion_2.Service.OrderService>();
 builder.Services.AddScoped<Evaluacion_2.Service.IClientService, Evaluacion_2.Service.ClientService>();
 builder.Services.AddScoped<Evaluacion_2.Service.IProductService, Evaluacion_2.Service.ProductService>();

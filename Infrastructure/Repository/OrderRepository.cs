@@ -78,4 +78,25 @@ public class OrderRepository : IOrderRepository
             .Distinct()
             .ToListAsync();
     }
+
+    public async Task<IEnumerable<OrderDetailsDto>> GetOrdersWithDetailsAsDtoAsync()
+    {
+        return await _context.Orders
+            .Include(o => o.Orderdetails)
+            .ThenInclude(od => od.Product)
+            .AsNoTracking()
+            .Select(o => new OrderDetailsDto
+            {
+                OrderId = o.OrderId,
+                OrderDate = o.OrderDate,
+                Products = o.Orderdetails.Select(od => new ProductDto
+                {
+                    ProductId = od.Product.ProductId,
+                    Name = od.Product.Name,
+                    Price = od.Product.Price,
+                    Description = od.Product.Description
+                }).ToList()
+            })
+            .ToListAsync();
+    }
 }
